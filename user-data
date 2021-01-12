@@ -10,7 +10,7 @@
 # Some additional examples are provided in comments below the default
 # configuration.
 
-hostname: pi4.your.hostname
+hostname: pi4.nosubject.io
 timezone: "Asia/Tokyo"
 locale: "ja_JP.UTF-8"
 
@@ -18,6 +18,7 @@ locale: "ja_JP.UTF-8"
 ssh_pwauth: false
 
 groups:
+  - myuser
   - docker
 
 # Replace ubuntu user  
@@ -26,7 +27,7 @@ users:
   - name: myuser
     gecos: I am an user.
     primary_group: myuser
-    groups: [adm, audio, cdrom, dialout, dip, floppy, lxd, netdev, plugdev, sudo, video]
+    groups: [adm, audio, cdrom, dialout, dip, floppy, lxd, netdev, plugdev, sudo, video, docker]
     shell: /bin/bash
     sudo: ALL=(ALL) NOPASSWD:ALL
     lock_passwd: true
@@ -42,6 +43,7 @@ users:
 ## Install additional packages on first boot
 packages:
 - emacs-nox
+- avahi-daemon
 
 ## Setting Up RAM Disk for tmp and logs dirs.
 mounts:
@@ -58,5 +60,3 @@ runcmd:
   - apt-get install -y docker-ce docker-ce-cli containerd.io
   - ufw limit ssh
   - ufw enable
-
-
